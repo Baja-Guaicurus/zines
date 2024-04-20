@@ -11,7 +11,7 @@ estão operando.
 ### IDE (_Integrated Development Environment_)
 
 Para inserir as instruções na plaquinha e torná-la em uma ferramente útil,
-primeiro é preciso compreender como o arduino vai interpretar essas intruções
+primeiro é preciso compreender como o arduino vai interpretar essas instruções
 e como elas devem ser feitas.
 
 Nós utilizamos a própria IDE da ferramenta, que por capricho tem a sua própria
