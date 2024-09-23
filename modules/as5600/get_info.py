@@ -8,7 +8,8 @@ with open(path, encoding='utf-8') as file:
     data_list = []
 
     # pega cada linha do arquivo e atribui os dados
-    # a um dicionário (pode ser usado futuramente)
+    # a um dicionário que separa as informações para
+    # que possam ser usadas com facilidade
     line_count = 1
     for line in data.splitlines():
 
@@ -23,7 +24,8 @@ with open(path, encoding='utf-8') as file:
         data_list.append(tmp)
 
     # vai armazenar os momentos em que o martelo estava preso
-    # no gancho
+    # no gancho, os testes atuais indicam que quando o sensor
+    # acusa 321 graus, é quando o martelo está preso.
     locked_moment_list = []
 
     line_count = 1
@@ -32,8 +34,7 @@ with open(path, encoding='utf-8') as file:
             locked_moment_list.append(i)
         line_count += 1
     
-    # pegando o último momento antes do martelo ser
-    # liberado
+    # pegando o último momento antes do martelo ser liberado
     last_target_line = locked_moment_list[-1]
     last_target_line = int(last_target_line['line'])
 
@@ -44,13 +45,15 @@ with open(path, encoding='utf-8') as file:
 
     # atribui o valor da última vez que apareceu o 321
     last_degree = int(data_list[last_target_line]['degrees'])
-    # ponto máximo após o impacto
+
+    # aqui vamos guardar o valor do último ângulo antes do pêndulo
+    # inverter a direção de giro.
     max_degree= 0
 
     for i in data_list[last_target_line + 1:]:
         target = int(i['degrees'])
 
-        # se o valor interior for maior e o grau atual,
+        # se o valor interior for maior que o atual,
         # significa que o pêndulo atingiu o ponto máximo e
         # está voltado (em sentido anti-horário)
         if last_degree < target:
@@ -61,16 +64,18 @@ with open(path, encoding='utf-8') as file:
 
     # FIXME: 178 graus é quando o pêndulo está em repouso, próximo
     # da região de impacto, faça com que esse valor seja dinâmico.
-    # faça algo como pedir para que o usuári coloque o pêndulo próximo
-    # ao corpo de prova para realizar o impacto
+    # algo como pedir para que o usuário que coloque o pêndulo próximo
+    # ao corpo de prova para realizar o impacto vai servir.
     opening_angle = 178 - last_degree
 
     print(f"O pêndulo fez uma abertura de {opening_angle} graus")
 
     # massa do pêndulo
     m = 8.65
+
     # tamanho do pêndulo
     l = 0.8
+
     beta = opening_angle
 
     # qual é a altura que o martelo subiu?
