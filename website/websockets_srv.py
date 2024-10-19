@@ -15,6 +15,7 @@ async def get_string(websocket):
         data = ser.readline()
         data = data.decode()
         data = data[:-2]
+        print(data)
         await websocket.send(data)
 
 async def main():

@@ -4,7 +4,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
 	websocket.onmessage = ({ data }) => {
 		const json = JSON.parse(data)
-		document.getElementById("velo").innerHTML = json["velo"];
-		document.getElementById("temp").innerHTML = json["temp"];
+		document.getElementById("rpm").innerHTML = "RPM: " + json["rpm"];
+		document.getElementById("comb").innerHTML = "Combustível: " + json["comb"];
+		document.getElementById("temp_cvt").innerHTML = "Temperatura da CVT: " + json["temp_cvt"];
+		document.getElementById("velo").innerHTML = "Velocidade: " + json["velo"];
 	};
 });
