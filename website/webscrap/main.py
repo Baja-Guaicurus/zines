@@ -1,5 +1,4 @@
 import requests
-import re
 from bs4 import BeautifulSoup
 
 URL="https://resultados.bajasaebrasil.net/prova.php?id=25BR_GER"
@@ -13,8 +12,7 @@ if req.status_code == 200:
 
     data = []
     for line in table.tbody.children:
-        if re.search(r'Baja Guaicurus', line.text):
-
+        if "Baja Guaicurus" in line.text:
             i = 0
             for field in line.children:
                 if i == 0 or i == 10:
